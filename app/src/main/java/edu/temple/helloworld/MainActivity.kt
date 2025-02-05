@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,12 +27,12 @@ class MainActivity : AppCompatActivity() {
         clickMeButton.setOnClickListener {
             val name = nameEditText.text.toString().trim()
 
-            if (name.isNotEmpty()) {
-                // Only display greeting if name is entered
-                displayTextView.text = "Hello, $name"
+            if (name.isEmpty()) {
+                // Fix #2: Show error message when input is empty
+                nameEditText.error = "Name cannot be empty"
+                Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show()
             } else {
-                // Do nothing (no "Hello," displayed)
-                displayTextView.text = ""
+                displayTextView.text = "Hello, $name"
             }
         }
     }
